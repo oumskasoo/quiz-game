@@ -33,7 +33,7 @@
             <!-- Grade dropdown -->
             <select id="grade" required>
                 <option value="">-- Please Select --</option>
-                <option value="grade3">Grade 2</option>
+                <option value="grade2">Grade 2</option>
             </select>
 
             <br><br>
@@ -48,6 +48,19 @@
         <div class="teacher-entry">
             <button class="teacher-btn" onclick="location.href='login.html'">Login as Teacher</button>
         </div>
+
+        <!-- Start Confirmation Box -->
+        <div id="confirm-box" class="confirm-overlay">
+            <div class="confirm-content">
+                <h2 id="confirm-title">Ready to Start?</h2>
+                <p id="confirm-details">You are about to start the quiz.</p>
+                <div class="confirm-buttons">
+                    <button id="confirm-start">Start Now</button>
+                    <button id="confirm-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <!-- End Confirmation Box -->
     </main>
 
     <footer>© 2025 Little Catus Studio. All rights reserved.</footer>

@@ -48,6 +48,50 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* --- Quiz start confirmation box --- */
+#confirm-box {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.confirm-content {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+}
+
+.confirm-buttons {
+  margin-top: 25px;
+}
+
+.confirm-buttons button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.confirm-buttons #confirm-start {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+}
+
+.confirm-buttons #confirm-start:hover {
+  background-color: #0056b3;
+}
+
 footer {
     width: 100%;
     text-align: center;
@@ -56,3 +100,11 @@ footer {
     color: #777;
     background-color: #f0f0f0;
 }
+
+html, body { 
+  margin: 0;             /* 确保没有默认外边距引起的计算误差 */
+  overflow-x: hidden;    /* 彻底关掉横向滚动 */
+}
+
+* { box-sizing: border-box; }   /* 防止 padding 让宽度 > 100% */
+img, video { max-width: 100%; height: auto; } /* 图片不超宽 */

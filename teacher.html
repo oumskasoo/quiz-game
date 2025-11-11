@@ -12,15 +12,30 @@
     <header>
         <h1>Teacher Dashboard</h1>
         <p>Welcome, Teacher!</p>
+        <button id="logout-btn" class="logout-btn">Logout</button>
     </header>
 
     <main>
-        <button id="clear-btn">Clear All Results</button>
+        <div class="action-buttons">
+            <button id="clear-btn">Clear All Results</button>
+            <button id="refresh-btn">🔄 Refresh Data</button>
+            
+        </div>
+
+        <section id="chart-section" style="text-align:center;margin:16px 0;">
+            <button id="toggle-chart-btn">📊 Show Feedback Chart</button>
+            <button id="export-csv-btn">⬇️ Export CSV</button>
+            <div id="chart-wrap" style="display:none;max-width:720px;margin:12px auto;">
+                <canvas id="feedbackChart"></canvas>
+            </div>
+        </section>
+
         <table id="results-table">
             <thead>
                 <tr>
-                    <th>Student Name</th>
+                    <th>Name</th>
                     <th>Score</th>
+                    <th>Feedback</th>
                     <th>Time</th>
                 </tr>
             </thead>
@@ -34,6 +49,8 @@
         <p>© 2025 Little Catus Studio. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="js/teacher.js"></script>
 </body>
 </html>
