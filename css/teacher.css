@@ -55,7 +55,6 @@ table tr:nth-child(even) {
     margin: 15px 0;
 }
 
-/* Refresh = 蓝色 */
 #refresh-btn {
     background-color: #3498db;
     color: white;
@@ -117,4 +116,16 @@ footer {
     text-align: center;
     margin-top: 50px;
     color: #888;
+}
+
+#results-table thead th[data-sort="asc"]::after {
+  content: " ▲";
+  font-size: 15px;
+  color: #39ff39;
+}
+
+#results-table thead th[data-sort="desc"]::after {
+  content: " ▼";
+  font-size: 15px;
+  color: #39ff39;
 }

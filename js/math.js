@@ -96,7 +96,6 @@ function showQuestion() {
   const shuffledOptions = q.options.slice().sort(() => Math.random() - 0.5);
   const correct = q.correctAnswer;
 
-  // 存一下本题所有按钮和小标记，方便后面处理
   const btns = [];
   const marks = [];
 
@@ -105,35 +104,29 @@ function showQuestion() {
     const option = shuffledOptions[i];
     const letter = optionLetters[i]; // A/B/C/D
 
-    // 每行容器
     const row = document.createElement("div");
-    row.className = "option-row"; // 可选：你也可以不用这个类
+    row.className = "option-row";
 
-    // 选项按钮
     const btn = document.createElement("button");
     btn.classList.add("option-button");
-    // 显示 A. 7 这种
     btn.innerText = `${letter}. ${option}`;
 
-    // ✅/❌ 标记（放在按钮里面，固定在右侧）
+    // ✅/❌ 标记
     const mark = document.createElement("span");
     mark.className = "answer-indicator";
     mark.textContent = ""; // 点击后再填
 
-    // 点击选项：记录答案 + 恢复你原本“选中变绿”的样式
     btn.onclick = function () {
       const selectedAnswer = btn.innerText.replace(/^.*?\.\s*/, "");
       userAnswers[currentQuestionIndex] = selectedAnswer;
 
       // 移除所有已选
       btns.forEach(b => b.classList.remove("selected"));
-      // 当前按钮加 selected（你 CSS 里本来就有“选中变绿”的样式）
       btn.classList.add("selected");
     };
 
-    // 组装
     row.appendChild(btn);
-    btn.appendChild(mark);   // 关键：把标记放进按钮内部
+    btn.appendChild(mark);
     optionsContainer.appendChild(row);
 
     btns.push(btn);
@@ -156,7 +149,6 @@ function showQuestion() {
   checkWrap.appendChild(note);
   optionsContainer.appendChild(checkWrap);
 
-  // === Check 逻辑：显示 ✅/❌ 并锁定（不用 disabled）===
   checkBtn.onclick = function () {
     const selected = userAnswers[currentQuestionIndex];
     if (!selected) {
@@ -198,7 +190,6 @@ function showQuestion() {
       });
     }
 
-    // 锁定：不用 disabled，避免变灰
     btns.forEach(b => {
       b.classList.add("locked");                // CSS 里定义 pointer-events:none;
       b.setAttribute("aria-disabled", "true");  // 语义
@@ -244,14 +235,12 @@ function handleNext() {
     } else {
         // —— 做完最后一题 ——
         const total   = questions.length;
-        const score   = calculateScore();                     // ✅ 用回函数统计
+        const score   = calculateScore();
         const percent = Math.round((score / total) * 100);
 
-        // 标题与内容收尾
         if (questionText) questionText.textContent = "Quiz Completed!";
         if (optionsContainer) optionsContainer.innerHTML = "";
 
-        // 上报成绩（保留你的 Apps Script 逻辑）
         submitToGoogleSheet(studentName, score);
 
         // 分数面板
@@ -271,7 +260,6 @@ function handleNext() {
           </div>
         `;
 
-        // 稳健插入：优先放在题号条上方，找不到就放容器末尾
         const container = document.getElementById("quiz-container");
         const tracker   = document.getElementById("question-tracker");
 
@@ -280,7 +268,7 @@ function handleNext() {
         } else if (container) {
           container.appendChild(panel);
         } else {
-          document.body.appendChild(panel); // 兜底：至少让它出现
+          document.body.appendChild(panel);
         }
 
         if (tracker) tracker.style.display = "none";
@@ -321,7 +309,6 @@ function handleNext() {
           homeBtn.onclick = () => { window.location.href = "index.html"; };
         }
 
-        // 若有 Check 区域残留，隐藏
         const checkWrap = document.querySelector(".check-wrap");
         if (checkWrap) checkWrap.style.display = "none";
       }

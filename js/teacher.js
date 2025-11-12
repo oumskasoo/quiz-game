@@ -15,6 +15,51 @@ document.addEventListener("DOMContentLoaded", async function() {
     // DOM
     const tableBody = document.querySelector("#results-table tbody");
 
+    const SORT_TYPES = ["text", "number", "text", "date"]; // Name, Score, Feedback, Time
+
+    const theadThs = document.querySelectorAll("#results-table thead th");
+    const tbody = document.querySelector("#results-table tbody");
+
+    // 给每个表头加点击事件
+    theadThs.forEach((th, idx) => {
+      th.style.cursor = "pointer";
+      th.addEventListener("click", () => {
+        // 计算新方向（asc/desc）
+        const current = th.getAttribute("data-sort") || "none";
+        const dir = current === "asc" ? "desc" : "asc";
+        // 清空其它表头的箭头
+        theadThs.forEach(h => h.removeAttribute("data-sort"));
+        th.setAttribute("data-sort", dir);
+
+        // 读取当前表格行并排序
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const type = SORT_TYPES[idx];
+
+        rows.sort((a, b) => {
+          const aText = a.children[idx]?.textContent.trim() ?? "";
+          const bText = b.children[idx]?.textContent.trim() ?? "";
+
+          let aVal = aText, bVal = bText;
+          if (type === "number") {
+            aVal = parseFloat(aText) || 0;
+            bVal = parseFloat(bText) || 0;
+          } else if (type === "date") {
+            aVal = Date.parse(aText) || 0;
+            bVal = Date.parse(bText) || 0;
+          } else {
+            aVal = aText.toLowerCase();
+            bVal = bText.toLowerCase();
+          }
+
+          const cmp = aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
+          return dir === "asc" ? cmp : -cmp;
+        });
+
+        // 重新挂回排序后的行
+        rows.forEach(r => tbody.appendChild(r));
+      });
+    });
+
     // 工具：拉取 gviz JSON
     async function fetchSheetJSON(gvizUrl) {
       const res = await fetch(gvizUrl);
@@ -92,7 +137,6 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     async function loadAndRenderData() {
       try {
-        // 避免缓存：加时间戳
         const bust = `&cachebust=${Date.now()}`;
         const res = await fetch(url + bust);
         const text = await res.text();
@@ -103,14 +147,11 @@ document.addEventListener("DOMContentLoaded", async function() {
         // 渲染表格
         renderTable(sorted);
 
-        // 如果你使用“Show/Hide Chart” 按钮机制：
         // 1) 初始化按钮（首次进来时需要）
         if (typeof initChartToggle === "function") {
-          // 只在第一次初始化：如果你已调用过，可以忽略这行
           initChartToggle(sorted);
         }
 
-        // 2) 如果图表当前“可见”，则同步刷新图表
         const wrap = document.getElementById("chart-wrap");
         if (wrap && wrap.style.display !== "none") {
           // 重建 canvas，确保尺寸正确，然后下一帧绘图
@@ -168,7 +209,7 @@ document.addEventListener("DOMContentLoaded", async function() {
       const ctx = canvas.getContext("2d");
 
       feedbackChartInstance = new Chart(ctx, {
-        type: "pie",  // ✅ 普通圆饼图
+        type: "pie",
         data: {
           labels,
           datasets: [{
@@ -182,7 +223,7 @@ document.addEventListener("DOMContentLoaded", async function() {
           maintainAspectRatio: false,
           plugins: {
             legend: { position: "bottom" },
-            tooltip: { enabled: false },  // ❌ 关闭鼠标悬停提示
+            tooltip: { enabled: false }, 
             // ✅ 在扇区上显示百分比
             datalabels: {
               formatter: (val, ctx) => {
