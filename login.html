@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            background-color: #f2f2f2;
+        }
+        #login-box {
+            background-color: white;
+            padding: 30px;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        input {
+            padding: 10px;
+            width: 200px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-box">
+        <h2>Teacher Login</h2>
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button onclick="login()">Login</button>
+        <button onclick="cancelLogin()">Cancel</button>
+    </div>
+
+    <script>
+        document.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") login();
+        });
+
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === "teacher" && password === "1234") {
+                localStorage.setItem("teacherLoggedIn", "true");
+                window.location.href = "teacher.html";
+            } else {
+                alert("Login failed.");
+            }
+        }
+
+        function cancelLogin() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

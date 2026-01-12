@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f8f8f8;
+}
+
+header h1 {
+    text-align: center;
+    color: #333;
+}
+
+#logout-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 18px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.25s ease, transform 0.15s ease;
+}
+
+#logout-btn:hover {
+    background-color: #1a4870;
+    transform: translateY(-2px);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+}
+
+table th {
+    background-color: #007bff;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;                 /* Spacing between buttons */
+    margin: 15px 0;
+}
+
+#refresh-btn {
+    background-color: #3498db;
+    color: white;
+    margin-top: 15px;
+    font-size: 16px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+#refresh-btn:hover {
+    transform: scale(1.2);
+}
+
+#clear-btn {
+    background-color: #ff4538;
+    color: white;
+    margin-top: 15px;
+    font-size: 16px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+#clear-btn:hover {
+    transform: scale(1.2);
+}
+
+#export-csv-btn {
+    background-color: #9b59b6;
+    color: white;
+    margin-top: 15px;
+    font-size: 16px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#export-csv-btn:hover {
+    transform: scale(1.2);
+}
+
+/* #toggle-chart-btn {
+    background-color: #9b59b6;
+    color: white;
+    margin-top: 15px;
+    font-size: 16px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+} */
+
+/* #toggle-chart-btn:hover {
+    transform: scale(1.2);
+} */
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #888;
+}
+
+#results-table thead th[data-sort="asc"]::after {
+  content: " ▲";
+  font-size: 15px;
+  color: #39ff39;
+}
+
+#results-table thead th[data-sort="desc"]::after {
+  content: " ▼";
+  font-size: 15px;
+  color: #39ff39;
+}

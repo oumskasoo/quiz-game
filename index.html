@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Quiz System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <img src="images/logo.png" alt="Logo" width="100" style="display: block; margin: 0 auto;" />
+
+    <header>
+        <h1>Welcome to the Quiz System</h1>
+        <p>Select a subject to start your learning journey!</p>
+    </header>
+
+    <div class="banner">
+        <img src="images/homepage.png" alt="Education Banner" width="1200">
+    </div>
+
+    <main class="main-section">
+        <form onsubmit="return startQuiz();">
+            <h2>Choose Your Subject</h2>
+            <!-- Subject dropdown -->
+            <select id="subject" required>
+                <option value="">-- Please Select --</option>
+                <option value="math.html">Mathematics</option>
+            </select>
+
+            <br><br>
+
+            <h2>Choose Your Grade</h2>
+            <!-- Grade dropdown -->
+            <select id="grade" required>
+                <option value="">-- Please Select --</option>
+                <option value="grade2">Grade 2</option>
+            </select>
+
+            <br><br>
+
+            <div class="name-entry">
+                <input type="text" id="username" placeholder="Your Name">
+                <br><br>
+                <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+            </div>
+        </form>
+
+        <div class="teacher-entry">
+            <button class="teacher-btn" onclick="location.href='login.html'">Login as Teacher</button>
+        </div>
+
+        <!-- Start Confirmation Box -->
+        <div id="confirm-box" class="confirm-overlay">
+            <div class="confirm-content">
+                <h2 id="confirm-title">Ready to Start?</h2>
+                <p id="confirm-details">You are about to start the quiz.</p>
+                <div class="confirm-buttons">
+                    <button id="confirm-start">Start Now</button>
+                    <button id="confirm-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <!-- End Confirmation Box -->
+    </main>
+
+    <footer>© 2025 Little Catus Studio. All rights reserved.</footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
